@@ -1,0 +1,9 @@
+version: '3.8'
+services:
+  postgres: # El nombre de tu servicio
+    image: postgres:latest
+    environment:
+      POSTGRES_PASSWORD: Password1
+      POSTGRES_DB: skinet_db
+    ports:
+      - "5433:5432"
