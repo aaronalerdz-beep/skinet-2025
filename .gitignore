@@ -104,6 +104,19 @@ StyleCopReport.xml
 *.svclog
 *.scc
 
+/images/
+**/*.jpg
+
+**/*.jpeg
+
+**/*.png
+
+**/*.gif
+
+**/*.svg
+
+**/*.webp
+
 # Chutzpah Test files
 _Chutzpah*
 
