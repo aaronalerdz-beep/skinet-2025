@@ -1,0 +1,17 @@
+<div>
+    <button mat-stroked-button (click)="get400Error()">Test 400 Error</button>
+    <button mat-stroked-button (click)="get404Error()">Test 404 Error</button>
+    <button mat-stroked-button (click)="get401Error()">Test 401 Error</button>
+    <button mat-stroked-button (click)="get500Error()">Test 500 Error</button>
+    <button mat-stroked-button (click)="get400validationerror()">Test 400 valerror</button>
+</div>
+
+@if(validatioError){
+    <div class="mx-auto max-w-lg mt-5 bg-red-50">
+        <ul class="space-y-2 p2">
+            @for (error of validatioError; track $index){
+                    <li class="text-red-900">{{error}}</li>
+            }
+        </ul>
+    </div>
+}

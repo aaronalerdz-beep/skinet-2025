@@ -17,6 +17,11 @@ public class BuggyController : BaseApiController
     {
         return NotFound();
     }
+    [HttpGet("badrequest")]
+    public IActionResult GetBadRequest()
+    {
+        return BadRequest("Not a goog request");
+    }
     [HttpGet("internalerror")]
     public IActionResult GetInternalError()
     {

@@ -1,8 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { MatIconModule} from '@angular/material/icon';
 import { MatButtonModule} from '@angular/material/button';
 import { MatBadgeModule} from '@angular/material/badge';
+import { MatProgressBar} from '@angular/material/progress-bar';
 import { RouterLink, RouterLinkActive } from "@angular/router";
+import { Busy } from '../../core/services/busy';
 
 @Component({
   selector: 'app-header',
@@ -12,11 +14,12 @@ import { RouterLink, RouterLinkActive } from "@angular/router";
     MatButtonModule,
     MatBadgeModule,
     RouterLink,
-    RouterLinkActive
+    RouterLinkActive,
+    MatProgressBar
 ],
   templateUrl: './header.html',
   styleUrl: './header.scss',
 })
 export class Header {
-
+  busyServices = inject(Busy);
 }
