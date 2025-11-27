@@ -14,3 +14,7 @@
     height: var(--mat-form-container-height) !important;
   }
 }
+
+.mdc-notched-outline__notch{
+  border-right-style: none !important;
+}

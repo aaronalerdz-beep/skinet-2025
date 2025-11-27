@@ -13,6 +13,8 @@ import { MatListOption, MatSelectionList, MatSelectionListChange } from '@angula
 import { ShopParams } from '../../shared/Models/shopParams';
 import { Pagination } from '../../shared/Models/pagination';
 import { FormsModule } from '@angular/forms';
+import { signal } from '@angular/core';
+
 
 @Component({
   selector: 'app-shop',
@@ -32,10 +34,10 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './shop.html',
   styleUrl: './shop.scss',
 })
-export class Shop {
+export class Shop implements OnInit{
   private shopService = inject(ShopService);
   private dialogService = inject(MatDialog);
-  products?: Pagination<Product>;
+  products = signal<Pagination<Product> | null>(null);
   sortOptions = [
     {name: 'Alphabetical', value: 'name'},
     {name: 'Prices: Low_high', value: 'priceAsc'},
@@ -56,7 +58,7 @@ export class Shop {
   getProducts(){
     
     this.shopService.getProducts(this.shopParams).subscribe({
-      next: response => this.products = response, 
+      next: response => this.products.set(response),
       error: error => console.log(error),
       complete: () => console.log('complete')
     })
