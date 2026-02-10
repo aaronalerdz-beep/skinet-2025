@@ -1,9 +1,22 @@
 version: '3.8'
 services:
-  postgres: # El nombre de tu servicio
-    image: postgres:latest
+  postgres: 
+    image: postgres:15-alpine
+    container_name: skinet-postgres
     environment:
       POSTGRES_PASSWORD: Password1
       POSTGRES_DB: skinet_db
     ports:
       - "5433:5432"
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+  redis:
+    image: redis:7-alpine
+    container_name: skinet-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+volumes:
+  redis-data:
+  pg_data:

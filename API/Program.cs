@@ -36,7 +36,7 @@ try
 }
 catch (Exception ex)
 {
-    Console.WriteLine(ex+"'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''");
+    Console.WriteLine(ex+"");
     throw;
 }
 

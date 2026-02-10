@@ -498,3 +498,5 @@ $RECYCLE.BIN/
 API/appsettings.json
 client/ssl/localhost-key.pem
 client/ssl/localhost.pem
+API/ssl/localhost-key.pem
+API/ssl/localhost.pem
