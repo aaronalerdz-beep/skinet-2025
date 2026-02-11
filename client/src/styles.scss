@@ -1,4 +1,7 @@
+
 @use '@angular/material' as mat;
+
+@include mat.core();
 
 // Customize the entire app. Change :root to your selector if you want to scope the styles.
 :root {
