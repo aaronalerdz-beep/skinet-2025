@@ -3,6 +3,7 @@ using System.Net.Http.Headers;
 using API.Middleware;
 using Core.Interfaces;
 using Infrastructure.Data;
+using Infrastructure.Services;
 using Microsoft.EntityFrameworkCore;
 using StackExchange.Redis;
 
@@ -25,6 +26,7 @@ builder.Services.AddSingleton<IConnectionMultiplexer>(config =>
     var configutarion = ConfigurationOptions.Parse(connString, true);
     return ConnectionMultiplexer.Connect(configutarion);
 });
+builder.Services.AddSingleton<ICartService, CartService>();
 
 var app = builder.Build();
 
