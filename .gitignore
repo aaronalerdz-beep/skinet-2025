@@ -494,6 +494,8 @@ $RECYCLE.BIN/
 *.lnk
 *.dll
 *.exe
+*.json
+*.config
 
 # Vim temporary swap files
 *.swp
