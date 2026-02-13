@@ -492,6 +492,8 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+*.dll
+*.exe
 
 # Vim temporary swap files
 *.swp
@@ -503,3 +505,7 @@ API/ssl/localhost.pem
 
 client/src/environments/environment.development.ts
 client/src/environments/environment.ts
+API/bin/Debug/net10.0/BuildHost-net472/Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.exe.config
+API/bin/Debug/net10.0/BuildHost-netcore/Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.deps.json
+API/bin/Debug/net10.0/BuildHost-netcore/Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.dll.config
+.gitignore
