@@ -2,7 +2,7 @@
 @use '@angular/material' as mat;
 
 @include mat.core();
-
+@import "@angular/material/prebuilt-themes/deeppurple-amber.css";
 // Customize the entire app. Change :root to your selector if you want to scope the styles.
 :root {
   @include mat.button-overrides((

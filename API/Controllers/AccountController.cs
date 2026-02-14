@@ -62,11 +62,12 @@ public class AccountController(SignInManager<AppUser> signInManager) : BaseApiCo
         });
     }
 
-    [HttpGet]
+    [HttpGet("auth-status")]
     public ActionResult GetAuthState()
     {
-        return Ok(new {IAuthenticated = User.Identity?.IsAuthenticated ?? false });
+        return Ok(new {isAuthenticated = User.Identity?.IsAuthenticated ?? false });
     }
+
     [Authorize]
     [HttpPost("address")]
     public async Task<ActionResult<Address>> CreateOrUpdateAddress(AddressDto addressDto)
