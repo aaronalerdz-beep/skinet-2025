@@ -119,7 +119,6 @@ async createAddressElement(): Promise<StripeAddressElement> {
     } else{
       throw new Error('unable to load stripe');
     }
-
   }
 
   createOrUpdatePaymentIntent(){
