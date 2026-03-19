@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
-import { Order, OrderToCreate } from '../../shared/Models/order';
+import { OrderM, OrderToCreate } from '../../shared/Models/order';
 
 @Injectable({
   providedIn: 'root',
@@ -9,16 +9,17 @@ import { Order, OrderToCreate } from '../../shared/Models/order';
 export class OrderService {
   baseUrl = environment.apiUrl;
   private http = inject(HttpClient);
+  orderComplete = false;
 
   createOrder(orderToCreate: OrderToCreate){
-    return this.http.post<Order>(this.baseUrl + 'orders', orderToCreate)
+    return this.http.post<OrderM>(this.baseUrl + 'orders', orderToCreate)
   }
   getOrdersForUser(){
-    return this.http.get<Order[]>(this.baseUrl + 'orders');
+    return this.http.get<OrderM[]>(this.baseUrl + 'orders');
   }
 
   getOrderDetailed(id: number){
-    return this.http.get<Order>(this.baseUrl + 'orders/' + id);
+    return this.http.get<OrderM>(this.baseUrl + 'orders/' + id);
   }
   
 }

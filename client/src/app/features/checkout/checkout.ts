@@ -125,6 +125,7 @@ export class Checkout implements AfterViewInit, OnDestroy {
           const order = await this.createOrderModel();
           const orderResult = await firstValueFrom(this.orderService.createOrder(order));
           if(orderResult){
+            this.orderService.orderComplete = true;
             this.cartService.deleteCart();
             this.cartService.selectDelivery.set(null);
             this.router.navigateByUrl('/checkout/success');

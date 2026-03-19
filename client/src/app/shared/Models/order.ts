@@ -1,4 +1,4 @@
-export interface Order {
+export interface OrderM {
   id: number
   orderDate: string
   buyerEmail: string
