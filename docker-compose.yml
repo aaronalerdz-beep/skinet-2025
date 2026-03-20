@@ -1,15 +1,16 @@
-version: '3.8'
+
 services:
-  postgres: 
-    image: postgres:15-alpine
-    container_name: skinet-postgres
+  sqlserver: 
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: skinet-sqlserver
     environment:
-      POSTGRES_PASSWORD: Password1
-      POSTGRES_DB: skinet_db
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=Password123!
+      - MSSQL_PID=Developer
     ports:
-      - "5433:5432"
+      - "1433:1433"
     volumes:
-      - pg_data:/var/lib/postgresql/data
+      - sql_data:/var/opt/mssql
   redis:
     image: redis:7-alpine
     container_name: skinet-redis
@@ -17,6 +18,7 @@ services:
       - "6379:6379"
     volumes:
       - redis-data:/data
+
 volumes:
   redis-data:
-  pg_data:
+  sql_data:
