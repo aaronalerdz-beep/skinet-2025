@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
-    <Content Include="Data\SeedData\**\*.json">
+    <Content Include="Data/SeedData/**/*.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <LinkBase>Data\SeedData</LinkBase>
     </Content>
