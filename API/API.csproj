@@ -7,11 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-  <Compile Remove="**/*.razor" />
-  <Compile Remove="**/*.cshtml" />
-</ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Infrastructure\Infrastructure.csproj" />
   </ItemGroup>
 
