@@ -25,9 +25,12 @@ jobs:
       - name: Install Angular CLI
         run: npm install -g @angular/cli@18
 
-      - name: Install dependencies and build
+      - name: List files for debug
+        run: ls -R
+
+      - name: Install deps and build
         run: |
-          cd client
+          cd skinet/client
           npm install
           npm run build -- --configuration=production
 
