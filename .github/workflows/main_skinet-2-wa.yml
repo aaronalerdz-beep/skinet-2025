@@ -17,10 +17,11 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+
       - name: Set up node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '22'
+          node-version: '24'
 
       - name: Install Angular CLI
         run: npm install -g @angular/cli@21
