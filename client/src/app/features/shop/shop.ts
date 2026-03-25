@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, computed, inject, OnInit } from '@angular/core';
 import { ShopService } from '../../core/services/shop';
 import { Product } from '../../shared/Models/product';
 import { MatCard } from '@angular/material/card'
@@ -14,6 +14,7 @@ import { ShopParams } from '../../shared/Models/shopParams';
 import { Pagination } from '../../shared/Models/pagination';
 import { FormsModule } from '@angular/forms';
 import { signal } from '@angular/core';
+import { EmptyState } from "../../shared/components/empty-state/empty-state";
 
 
 @Component({
@@ -29,7 +30,8 @@ import { signal } from '@angular/core';
     MatMenuTrigger,
     MatPaginator,
     FormsModule,
-    MatIconButton
+    MatIconButton,
+    EmptyState
 ],
   templateUrl: './shop.html',
   styleUrl: './shop.scss',
@@ -55,13 +57,18 @@ export class Shop implements OnInit{
     this.shopService.getTypes();
     this.getProducts();
   }
+  resetFilters(){
+    this.shopParams = new  ShopParams();
+    this.getProducts();
+  }
+
   getProducts(){
     
     this.shopService.getProducts(this.shopParams).subscribe({
       next: response => this.products.set(response),
       error: error => console.log(error),
       complete: () => console.log('complete')
-    })
+    });
 
   }
   onSearchChange(){
