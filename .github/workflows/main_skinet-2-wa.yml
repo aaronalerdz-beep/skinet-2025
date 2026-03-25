@@ -30,7 +30,7 @@ jobs:
 
       - name: Install deps and build
         run: |
-          cd skinet/client
+          cd client
           npm install
           npm run build -- --configuration=production
 
