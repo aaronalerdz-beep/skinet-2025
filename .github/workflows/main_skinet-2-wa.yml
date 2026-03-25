@@ -17,25 +17,22 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-
       - name: Set up node.js
         uses: actions/setup-node@v4
         with:
           node-version: '22'
-          cache: 'npm'
-          cache-dependency-path: './client/package-lock.json'
-          
-      - name: Install Angular CLI
-        run: npm install -g @angular/cli@21
 
-      - name: List files for debug
-        run: ls -R
+      - name: Verificar archivos (Debug)
+        run: ls -R  
 
-      - name: Install deps and build
+      - name: Install dependencies and build
         run: |
-          cd client
+          if [ -d "client" ]; then cd client; fi
           npm install
           npm run build -- --configuration=production
+
+      - name: Install Angular CLI
+        run: npm install -g @angular/cli@21
 
       - name: Set up .NET Core
         uses: actions/setup-dotnet@v4
