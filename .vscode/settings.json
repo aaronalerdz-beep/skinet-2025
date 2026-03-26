@@ -1,0 +1,17 @@
+{
+    "sqltools.connections": [
+        {
+            "ssh": "Disabled",
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 5433,
+            "askForPassword": true,
+            "driver": "PostgreSQL",
+            "name": "skinet_DB_Docker",
+            "database": "skinet_db",
+            "username": "postgres"
+        }
+    ],
+    "appService.defaultWebAppToDeploy": "/subscriptions/d5ca06cb-6e7b-459e-ab1b-ba4c7adce8db/resourceGroups/Skinet-store/providers/Microsoft.Web/sites/skinet-aaron",
+    "appService.deploySubpath": "API/bin/Publish"
+}

@@ -4,6 +4,7 @@ import {MatRadioModule} from '@angular/material/radio'
 import { CurrencyPipe } from '@angular/common';
 import { CartService } from '../../../core/services/cart';
 import { DeliveryMethod } from '../../../shared/Models/deliveryMethod';
+import { firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-checkout-delivery',
@@ -32,12 +33,12 @@ export class CheckoutDelivery implements OnInit{
       }
     });
   }
-  updateDeliveryMethod(method: DeliveryMethod){
+  async updateDeliveryMethod(method: DeliveryMethod){
     this.cartService.selectDelivery.set(method);
     const cart  = this.cartService.cart();
     if(cart){
       cart.deliveryMethodId = method.id;
-      this.cartService.setCart(cart);
+      await firstValueFrom(this.cartService.setCart(cart));
       this.deliveryComplete.emit(true);
     }
   }

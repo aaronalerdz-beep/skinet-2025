@@ -1,14 +1,30 @@
 using System;
 using System.Reflection;
+using System.Security.Cryptography.X509Certificates;
 using System.Text.Json;
+using Azure.Identity;
 using Core.Entities;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.Identity.Client;
 
 namespace Infrastructure.Data;
 
 public class StoreContextSeed
 {
-    public static async Task SeedAsync(StoreContext context)
+    public static async Task SeedAsync(StoreContext context, UserManager<AppUser> userManager)
     {
+            //dont do this in production
+        if(!userManager.Users.Any(x => x.UserName == "admin@test.com"))
+        {
+            var user = new AppUser
+            {
+                UserName = "admin@test.com",
+                Email = "admin@test.com"
+            };
+            await userManager.CreateAsync(user, "Listo123!");
+            await userManager.AddToRoleAsync(user, "Admin");
+        }
+
         var path = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
 
         if (!context.Products.Any())

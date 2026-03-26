@@ -6,14 +6,23 @@ using Product = Core.Entities.Product;
 
 namespace Infrastructure.Services;
 
-public class PaymentService(IConfiguration config, 
+public class PaymentService : IPaymentService
+{
+    private readonly ICartService cartService;
+    private readonly IUnitOfWork unit;
+
+    public PaymentService(IConfiguration config, 
                             ICartService cartService, 
                             IUnitOfWork unit)
-                            : IPaymentService
-{
+    {
+        this.cartService = cartService;
+        this.unit = unit;
+        StripeConfiguration.ApiKey =config["StripeSettings:SecretKey"];
+    }
+
+
     public async Task<ShoppingCart?> CreateOrUpdatePaymentIntent(string cartId)
     {
-       StripeConfiguration.ApiKey =config["StripeSettings:SecretKey"];
 
        var cart = await cartService.GetCartAsync(cartId);
 
@@ -67,5 +76,18 @@ public class PaymentService(IConfiguration config,
         }
         await cartService.SetCartAsync(cart);
         return cart;
+    }
+
+    public async Task<string> RefundPayment(string paymentIntentId)
+    {
+        var refoundOptions = new RefundCreateOptions
+        {
+          PaymentIntent = paymentIntentId  
+        };
+
+        var refoundService = new RefundService();
+        var result = await refoundService.CreateAsync(refoundOptions);
+
+        return result.Status;
     }
 }
