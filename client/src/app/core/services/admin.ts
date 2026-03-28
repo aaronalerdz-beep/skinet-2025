@@ -5,6 +5,7 @@ import { OrderParams } from '../../shared/Models/orderParams';
 import { HttpParams } from '@angular/common/http';
 import { Pagination } from '../../shared/Models/pagination';
 import { OrderM } from '../../shared/Models/order';
+import { Product } from '../../shared/Models/product';
 
 @Injectable({
   providedIn: 'root',
@@ -31,5 +32,21 @@ export class AdminService {
 
   refundOrder(id : number){
     return this.http.post<OrderM>(this.baseUrl + 'admin/orders/refund/' + id, {});
+  }
+  
+   createProduct(product: Product) {
+    return this.http.post<Product>(this.baseUrl + 'products', product);
+  }
+
+  updateProduct(product: Product) {
+    return this.http.put(this.baseUrl + 'products/' + product.id, product);
+  }
+
+  deleteProduct(id: number) {
+    return this.http.delete(this.baseUrl + 'products/' + id);
+  }
+
+  updateStock(id: number, newQuantity: number) {
+    return this.http.put(this.baseUrl + 'products/update-stock/' + id, newQuantity);
   }
 }
