@@ -17,5 +17,11 @@
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
   </ItemGroup>
+  <ItemGroup>
+  <Compile Remove="**/*.cs" />
+  <Content Remove="**/*.cshtml" />
+  <Content Remove="**/*.razor" />
+  <EmbeddedResource Remove="**/*.resx" />
+</ItemGroup>
 
 </Project>
