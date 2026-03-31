@@ -3,6 +3,10 @@
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+
+    <!-- ⚡ Evitamos que MSBuild busque archivos que no existen -->
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <EnableDefaultContentItems>false</EnableDefaultContentItems>
     <EnableDefaultEmbeddedResourceItems>false</EnableDefaultEmbeddedResourceItems>
   </PropertyGroup>
 
@@ -13,5 +17,13 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.12" PrivateAssets="all" />
+  </ItemGroup>
+
+  <!-- ⚡ Incluimos manualmente los archivos .cs del API -->
+  <ItemGroup>
+    <Compile Include="Program.cs" />
+    <Compile Include="Middleware\**\*.cs" />
+    <Compile Include="SignalR\**\*.cs" />
+    <!-- Agrega aquí cualquier carpeta extra con .cs que tengas -->
   </ItemGroup>
 </Project>
