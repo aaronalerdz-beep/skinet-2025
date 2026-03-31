@@ -26,6 +26,18 @@ jobs:
       - name: Install Angular CLI
         run: npm install -g @angular/cli@21
 
+      - name: Create environment files
+        run: |
+          mkdir -p client/src/environments
+          echo "export const environment = { 
+            production: true,
+            apiUrl: 'api/',
+            stripePublicKey: '${{ secrets.STRIPE_PUB_KEY }}'
+          };" > client/src/environments/environment.ts
+          
+          # También creamos el de producción por si tu angular.json lo requiere
+          cp client/src/environments/environment.ts client/src/environments/environment.production.ts
+
       - name: Verificar archivos (Debug)
         run: ls -R  
 
