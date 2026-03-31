@@ -50,9 +50,11 @@ jobs:
         run: dotnet restore
 
       - name: Build and Publish API
+        shell: bash  # Forzamos el uso de bash explícito
         run: |
           dotnet restore
-          dotnet build API/API.csproj --configuration Release
+          # Ejecutamos el build evitando que el shell intente expandir los asteriscos
+          dotnet build API/API.csproj --configuration Release -p:DefaultItemExcludes=""
           dotnet publish API/API.csproj -c Release -o ./publish_output
 
       - name: Upload artifact for deployment job
