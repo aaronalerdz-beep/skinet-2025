@@ -32,12 +32,13 @@ jobs:
           echo "export const environment = { 
             production: true,
             apiUrl: 'api/',
+            hubUrl: 'hub/',
             stripePublicKey: '${{ secrets.STRIPE_PUB_KEY }}'
           };" > client/src/environments/environment.ts
           
-          # También creamos el de producción por si tu angular.json lo requiere
+          # Copiamos para asegurar que ambos archivos existan con la misma estructura
           cp client/src/environments/environment.ts client/src/environments/environment.production.ts
-
+          
       - name: Verificar archivos (Debug)
         run: ls -R  
 
