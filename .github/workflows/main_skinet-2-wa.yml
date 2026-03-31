@@ -35,9 +35,8 @@ jobs:
             hubUrl: 'hub/',
             stripePublicKey: '${{ secrets.STRIPE_PUB_KEY }}'
           };" > client/src/environments/environment.ts
-          
-          # Copiamos para asegurar que ambos archivos existan con la misma estructura
           cp client/src/environments/environment.ts client/src/environments/environment.production.ts
+
       - name: Debug csproj
         run: cat API/API.csproj
       - name: Verificar archivos (Debug)
@@ -45,28 +44,26 @@ jobs:
       - name: Check for resx files
         run: find . -name "*.resx"
 
-      - name: Install dependencies and build
+      - name: Install dependencies and build Angular
         run: |
-          if [ -d "client" ]; then cd client; fi
+          cd client
           npm install
           npm run build -- --configuration=production
-          cd ..
 
       - name: Set up .NET Core
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '8.0.x'
-          dotnet-quality: 'ga'
-
-      - name: Clean
-        run: dotnet clean
-
 
       - name: Restore dependencies
-        run: dotnet restore
- 
-      - name: Build API only
-        run: dotnet build API/API.csproj --configuration Release
+        run: dotnet restore skinet.sln
+
+      - name: Build API
+        run: dotnet build API/API.csproj --configuration Release --no-restore
+
+      - name: Publish API
+        run: dotnet publish API/API.csproj -c Release -o ./publish
+
       - name: Check .NET version
         run: dotnet --info
 
