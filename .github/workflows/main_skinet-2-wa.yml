@@ -38,7 +38,8 @@ jobs:
           
           # Copiamos para asegurar que ambos archivos existan con la misma estructura
           cp client/src/environments/environment.ts client/src/environments/environment.production.ts
-
+      - name: Debug csproj
+        run: cat API/API.csproj
       - name: Verificar archivos (Debug)
         run: ls -R  
       - name: Check for resx files
@@ -49,6 +50,7 @@ jobs:
           if [ -d "client" ]; then cd client; fi
           npm install
           npm run build -- --configuration=production
+          cd ..
 
       - name: Set up .NET Core
         uses: actions/setup-dotnet@v4
@@ -62,9 +64,7 @@ jobs:
 
       - name: Restore dependencies
         run: dotnet restore
-
-      - name: Build with dotnet
-        run: dotnet build --configuration Release 
+ 
       - name: Build API only
         run: dotnet build API/API.csproj --configuration Release
       - name: Check .NET version
