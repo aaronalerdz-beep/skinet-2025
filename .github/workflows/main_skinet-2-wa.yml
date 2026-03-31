@@ -49,29 +49,31 @@ jobs:
           cd client
           npm install
           npm run build -- --configuration=production
+      
       - name: Set up .NET Core
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '8.0.x'
 
-      # Restauramos toda la solución para que las dependencias entre proyectos se resuelvan
       - name: Restore dependencies
-        run: dotnet restore skinet.sln
+        # Quitamos el nombre del .sln para que el SDK lo busque solo en el root
+        run: dotnet restore 
 
-      # Construimos la solución completa en lugar de solo el proyecto API
-      # Esto evita problemas de rutas relativas con Core e Infrastructure
-      - name: Build Solution
-        run: dotnet build skinet.sln --configuration Release --no-restore
+      - name: Build API
+        # Ejecutamos el build desde la raíz pero apuntando al proyecto
+        # Importante: quitamos el --no-restore por si acaso
+        run: dotnet build API/API.csproj --configuration Release
 
-      # Finalmente publicamos solo la API
       - name: dotnet publish
-        run: dotnet publish API/API.csproj -c Release -o ./myapp
+        # Usamos una ruta de salida simple y directa
+        run: dotnet publish API/API.csproj -c Release -o ./publish_output
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
         with:
           name: .net-app
-          path: ./myapp
+          path: ./publish_output
+
       - name: dotnet publish
         run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
 
