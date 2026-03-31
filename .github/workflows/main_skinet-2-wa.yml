@@ -46,6 +46,11 @@ jobs:
         with:
           dotnet-version: '8.0.101' # Forzamos una versión específica estable
 
+      - name: List files for debug
+        run: |
+          pwd
+          ls -R
+
       - name: Restore dependencies
         run: dotnet restore
 
