@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+
   workflow_dispatch:
 
 jobs:
@@ -50,8 +51,10 @@ jobs:
 
       - name: Build and Publish API
         run: |
-          dotnet build API/API.csproj --configuration Release --no-restore
-          dotnet publish API/API.csproj -c Release -o ./publish_output --no-restore
+          dotnet restore
+          dotnet build API/API.csproj --configuration Release
+          dotnet publish API/API.csproj -c Release -o ./publish_output
+
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
         with:
