@@ -38,9 +38,11 @@ jobs:
           
           # Copiamos para asegurar que ambos archivos existan con la misma estructura
           cp client/src/environments/environment.ts client/src/environments/environment.production.ts
-          
+
       - name: Verificar archivos (Debug)
         run: ls -R  
+      - name: Check for resx files
+        run: find . -name "*.resx"
 
       - name: Install dependencies and build
         run: |
