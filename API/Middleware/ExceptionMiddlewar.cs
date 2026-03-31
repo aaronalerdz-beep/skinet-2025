@@ -3,6 +3,7 @@ using System.Net;
 using System.Text.Json;
 using API.Errors;
 
+
 namespace API.Middleware;
 
 public class ExceptionMiddlewar(IHostEnvironment env, RequestDelegate next)
