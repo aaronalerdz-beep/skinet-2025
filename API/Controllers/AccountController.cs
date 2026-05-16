@@ -40,6 +40,7 @@ public class AccountController(SignInManager<AppUser> signInManager) : BaseApiCo
     [HttpPost("logout")]
     public async Task<ActionResult> Logout()
     {
+        
         await signInManager.SignOutAsync();
         return NoContent();
     }

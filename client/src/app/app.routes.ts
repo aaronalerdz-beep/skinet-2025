@@ -8,12 +8,14 @@ import { ServerError } from './shared/components/server-error/server-error';
 import { NotFound } from './shared/components/not-found/not-found';
 import { authGuard } from './core/guards/auth-guard';
 import { adminGuard } from './core/guards/admin-guard';
+import { Chatbot } from './features/chat/chatbot/chatbot';
 
 export const routes: Routes = [
     {path: '', component: Home},
     {path: 'shop', component: Shop},
     {path: 'shop/:id', component: ProductDetails},
     {path: 'cart', component: Cart},
+    {path: 'chat', component: Chatbot},
     {path: 'checkout', loadChildren: () => import('./features/checkout/routes').then(r => r.checkoutRoutes)},
     {path: 'orders', loadChildren: () => import('./features/orders/routes').then(r => r.orderRoutes)},
     {path: 'account', loadChildren: () => import('./features/account/routes').then(r => r.accountRoutes)},

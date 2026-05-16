@@ -12,7 +12,6 @@ using StackExchange.Redis;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
 
 builder.Services.AddControllers();
 builder.Services.AddDbContext<StoreContext>(opt =>
@@ -20,6 +19,8 @@ builder.Services.AddDbContext<StoreContext>(opt =>
     opt.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
+builder.Services.AddScoped<IOpenAiService, OpenAiService>();
+builder.Services.AddScoped<IChatService, ChatService>();
 builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 builder.Services.AddCors();
 builder.Services.AddSingleton<IConnectionMultiplexer>(config =>
@@ -41,7 +42,6 @@ builder.Services.AddSignalR();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 app.UseHttpsRedirection();
 app.UseMiddleware<ExceptionMiddlewar>();
 app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().AllowCredentials()
@@ -57,6 +57,7 @@ app.UseWebSockets();
 app.MapControllers();
 app.MapGroup("api").MapIdentityApi<AppUser>();
 app.MapHub<NotificationHub>("/hub/notifications");
+app.MapHub<ChatHub>("/hub/chatHub");
 app.MapFallbackToController("Index", "Fallback");
 
 
